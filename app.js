@@ -15,28 +15,45 @@ console.log('command', process.argv);
 
 
 console.log('Command: ', yargs.argv);
-	
+		
+	//---- Add command
 	if(command == 'add'){
 		let note = notes.addNote(argv.title, argv.body);
-		if(note){
-			console.log('note created');
-			console.log('---');
-			console.log(`Title: ${note.title}`);
-			console.log(`Body: ${note.body}`);	
-		}else{console.log('Note title taken')}
+		if(note) {
+			console.log('Note saved');
+			notes.logNote(note);
+		}else{
+			console.log('Note was taken');
+		}
 		
+		
+	//-------  List command
+			}else if(command == 'list'){
+				console.log("listing all notes");
 
-	}else if(command == 'list'){
-		console.log("listing all notes");
-	}else if(command == 'read'){
-		console.log('Reading notes');
-	}else if(command == 'remove'){
-		let bool = notes.removeNote(argv.title);
-		let msg  = bool ? "item deleted" : "item not found";
-		console.log(msg);
-	}else{
-		console.log('command not recognized');
-	}
+
+	//------------------ Read command
+				}else if(command == 'read'){
+
+					let note = notes.getItem(argv.title);
+					if(note) {
+						console.log('Note found');
+						notes.logNote(note);
+					}else{
+						console.log('Note was not found');
+					}
+
+	//------------------ Remove command
+					}else if(command == 'remove'){
+
+						let bool = notes.removeNote(argv.title);
+						let msg  = bool ? "item deleted" : "item not found";
+						console.log(msg);
+
+	//------------------ Unrecognized commands
+						}else{
+							console.log('command not recognized');
+						}
 
 
 
