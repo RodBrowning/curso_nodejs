@@ -1,4 +1,3 @@
-console.log('starting notes.js');
 const fs = require('fs');
 
 	var readFile = () => {	
@@ -58,16 +57,22 @@ const fs = require('fs');
 	};
 
 	var logNote = (note) => {
-		
-			console.log('---');
+			console.log('-----');
 			console.log(`Title: ${note.title}`);
 			console.log(`Body: ${note.body}`);	
 		
 	};	
 
+	// get all notes from data json
+	var getAll = () => {
+		// get data
+		return readFile('notes-data.json');;
+	};
+
 module.exports = {
 	addNote,
 	removeNote,
 	getItem,
-	logNote
+	logNote,
+	getAll
 };
